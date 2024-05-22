@@ -8,9 +8,7 @@
 import React from 'react';
 import type {PropsWithChildren} from 'react';
 import {
-  SafeAreaView,
   ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
   useColorScheme,
@@ -29,6 +27,8 @@ import {Provider} from 'react-redux';
 import {store} from './src/store';
 import {NavigationContainer} from '@react-navigation/native';
 import TabNavigator from './src/navigator/TabNavigator';
+import { AppNavigator } from './src/navigator/AppNavigator';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -41,14 +41,10 @@ function App(): React.JSX.Element {
 
   return (
     <Provider store={store}>
-       <NavigationContainer>
-      <SafeAreaView style={backgroundStyle}>
-       
-
-          <TabNavigator />
-     
+      <SafeAreaView style={backgroundStyle} edges={['bottom']}>
+          <AppNavigator/>
       </SafeAreaView>
-      </NavigationContainer>
+   
     </Provider>
   );
 }
